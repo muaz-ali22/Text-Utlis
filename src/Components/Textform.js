@@ -37,29 +37,37 @@ export default function Textform(props) {
             {text}
           </textarea>
           <div className="container my-3">
-            <button className="btn btn-primary mx-1 my-1  " onClick={handleUp}>
+            <button
+              disabled={text.length === 0}
+              className="btn btn-primary mx-1 my-1  "
+              onClick={handleUp}
+            >
               Convert to UpperCase
             </button>
 
             <button
+              disabled={text.length === 0}
               className="btn btn-outline-info  mx-1  my-1"
               onClick={handleDown}
             >
               Convert to LowerCase
             </button>
             <button
+              disabled={text.length === 0}
               className="btn btn-outline-danger  mx-1  my-1"
               onClick={handleSen}
             >
               Convert to SentenceCase
             </button>
             <button
+              disabled={text.length === 0}
               className="btn btn-outline-warning  mx-1  my-1"
               onClick={handleTile}
             >
               Convert to TileCase
             </button>
             <button
+              disabled={text.length === 0}
               className="btn btn-outline-success  mx-1  my-1"
               onClick={handleClear}
             >
@@ -82,7 +90,13 @@ export default function Textform(props) {
           </b>{" "}
           | Total Characters : <b>{text.length}</b> Characters
         </p>
-        <p>{0.008 * text.split(" ").length} Minutes to Read Complete Text</p>
+        <p>
+          {0.008 *
+            text.split(" ").filter((element) => {
+              return element.length != 0;
+            }).length}{" "}
+          Minutes to Read Complete Text
+        </p>
         <h3>Preview</h3>
         <p>
           {sentenceCase(text.length > 0 ? text : "Enter your text to preview")}
