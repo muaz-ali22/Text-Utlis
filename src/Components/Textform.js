@@ -4,23 +4,18 @@ import { titleCase } from "title-case";
 export default function Textform(props) {
   const handleUp = () => {
     setText(text.toUpperCase());
-    props.showAlert("Converted to UpperCase", "success");
   };
   const handleSen = () => {
     setText(sentenceCase(text));
-    props.showAlert("Converted to SentenceCase", "success");
   };
   const handleTile = () => {
     setText(titleCase(text));
-    props.showAlert("Converted to TileCase", "success");
   };
   const handleDown = () => {
     setText(text.toLowerCase());
-    props.showAlert("Converted to LowerCase", "success");
   };
   const handleClear = () => {
     setText(text.replace(text, ""));
-    props.showAlert("Cleared Text", "success");
   };
   const handlechange = (event) => {
     setText(event.target.value);
@@ -76,8 +71,16 @@ export default function Textform(props) {
       <div className="container my-3">
         <h3>Your Text Summary</h3>
         <p>
-          Total Words : <b> {text.split(" ").length}</b> | Total Characters :{" "}
-          <b>{text.length}</b> Characters
+          Total Words :{" "}
+          <b>
+            {" "}
+            {
+              text.split(" ").filter((element) => {
+                return element.length != 0;
+              }).length
+            }
+          </b>{" "}
+          | Total Characters : <b>{text.length}</b> Characters
         </p>
         <p>{0.008 * text.split(" ").length} Minutes to Read Complete Text</p>
         <h3>Preview</h3>
