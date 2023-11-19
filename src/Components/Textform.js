@@ -4,18 +4,23 @@ import { titleCase } from "title-case";
 export default function Textform(props) {
   const handleUp = () => {
     setText(text.toUpperCase());
+    props.showAlert("Converted to Upper Case", "success");
   };
   const handleSen = () => {
     setText(sentenceCase(text));
+    props.showAlert("Converted to Sentence Case", "success");
   };
   const handleTile = () => {
     setText(titleCase(text));
+    props.showAlert("Converted to Title Case", "success");
   };
   const handleDown = () => {
     setText(text.toLowerCase());
+    props.showAlert("Converted to Lower Case", "success");
   };
   const handleClear = () => {
     setText(text.replace(text, ""));
+    props.showAlert("Cleared Text", "success");
   };
   const handlechange = (event) => {
     setText(event.target.value);
@@ -83,8 +88,8 @@ export default function Textform(props) {
           <b>
             {" "}
             {
-              text.split(" ").filter((element) => {
-                return element.length != 0;
+              text.split(/\s+/).filter((element) => {
+                return element.length !== 0;
               }).length
             }
           </b>{" "}
@@ -93,7 +98,7 @@ export default function Textform(props) {
         <p>
           {0.008 *
             text.split(" ").filter((element) => {
-              return element.length != 0;
+              return element.length !== 0;
             }).length}{" "}
           Minutes to Read Complete Text
         </p>
